@@ -1,0 +1,47 @@
+package com.sue.musicplayer.data.mapper
+
+import com.sue.musicplayer.data.entity.PlayingMusicEntity
+import com.sue.musicplayer.data.response.RecommendMusicResponse
+import com.sue.musicplayer.data.response.MusicResponse
+import com.sue.musicplayer.domain.model.PlayingMusicModel
+import com.sue.musicplayer.domain.model.RecommendMusicModel
+import com.sue.musicplayer.domain.model.MusicModel
+
+fun RecommendMusicResponse.toRecommendMusicModel() =
+    RecommendMusicModel(
+        id = id,
+        title = title,
+        subTitle = subTitle,
+        imageUrl = imageUrl
+    )
+
+fun MusicResponse.toMusicModel() =
+    MusicModel(
+        id = id,
+        title = title,
+        artistName = artistName,
+        coverImageUrl = coverImageUrl,
+        streamUrl = streamUrl,
+        number = number,
+        rank = rank
+    )
+
+fun PlayingMusicEntity.toPlayingMusicModel(isPlaying: Boolean = false) =
+    PlayingMusicModel(
+        id, title, artistName, coverImageUrl, streamUrl, isFavorite, addedDateTime, lastPlayingDateTime, isPlaying
+    )
+
+fun PlayingMusicModel.toPlayingMusicEntity() =
+    PlayingMusicEntity(
+        id, title, artistName, coverImageUrl, streamUrl, isFavorite, addedDateTime, lastPlayingDateTime
+    )
+
+fun MusicModel.toPlayingMusicModel(addedDateTime: Long, lastPlayingDateTime: Long, isPlaying: Boolean) =
+    PlayingMusicModel(
+        id, title, artistName, coverImageUrl, streamUrl, false, addedDateTime, lastPlayingDateTime, isPlaying
+    )
+
+fun List<PlayingMusicEntity>.toPlayingMusicModelList() =
+    map {
+        it.toPlayingMusicModel(false)
+    }

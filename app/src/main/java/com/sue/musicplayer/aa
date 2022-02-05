@@ -1,0 +1,56 @@
+[
+  {
+    "title": "WHAT THE HELL",
+    "artistName": "Johnning",
+    "coverImageUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/079/325x325/what-the-hell-1642726835-5sgFBAaQSF.jpg",
+    "streamUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/079/what-the-hell-1642726839-I8Qf074MO2.mp3",
+    "number": 1,
+    "rank": 2,
+    "id": "100"
+  },
+  {
+    "title": "Take You Home",
+    "artistName": "Dust of Apollon, Sam Day",
+    "coverImageUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/078/325x325/take-you-home-1642683635-YtcZe4WXPz.jpg",
+    "streamUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/078/take-you-home-1642683641-x08CtkObUS.mp3",
+    "number": 2,
+    "rank": -1,
+    "id": "101"
+  },
+  {
+    "title": "The Garden",
+    "artistName": "Lochlainn",
+    "coverImageUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/077/325x325/the-garden-1642510835-ksIXN6OWuh.jpg",
+    "streamUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/077/the-garden-1642510839-PrM6psF5hC.mp3",
+    "number": 3,
+    "rank": -1,
+    "id": "102"
+  },
+  {
+    "title": "LEVITATE",
+    "artistName": "Neoni",
+    "coverImageUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/075/325x325/levitate-1642161631-MkJvqkOqjc.jpg",
+    "streamUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/075/levitate-1642161636-mAFiwFJq6T.mp3",
+    "number": 4,
+    "rank": 0,
+    "id": "103"
+  },
+  {
+    "title": "Binary",
+    "artistName": "HANNY, Donkong",
+    "coverImageUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/074/325x325/binary-1642078833-HKfRd1SeHg.jpg",
+    "streamUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/074/binary-1642078837-XJ67S6tL0W.mp3",
+    "number": 5,
+    "rank": 1,
+    "id": "104"
+  },
+  {
+    "title": "",
+    "artistName": "",
+    "coverImageUrl": "",
+    "streamUrl": "",
+    "number": 2,
+    "rank": -1,
+    "id": "101"
+  }
+]

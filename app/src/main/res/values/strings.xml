@@ -3,4 +3,8 @@
 
     <string name="new_release">New Release</string>
     <string name="top_songs">Top Songs</string>
+    <string name="see_all">See All</string>
+
+    <string name="no_playing_music">재생 중인 곡이 없습니다.</string>
+    <string name="playing_now">Playing Now</string>
 </resources>
