@@ -1,17 +1,17 @@
 package com.sue.musicplayer.domain.usecase.player
 
-import com.sue.musicplayer.data.mapper.toPlayingMusicModelList
+import com.sue.musicplayer.data.mapper.toPlayingMusicModel
 import com.sue.musicplayer.data.repository.PlayingMusicRepositoryService
 import com.sue.musicplayer.domain.model.PlayingMusicModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class GetPlayingMusicListUseCase(
+class GetLastPlayingMusicUseCase(
     private val playingMusicRepositoryService: PlayingMusicRepositoryService
 ) {
-    operator fun invoke(): Flow<List<PlayingMusicModel>> {
-        return playingMusicRepositoryService.playingMusicList.map {
-            it.toPlayingMusicModelList()
+    operator fun invoke(): Flow<PlayingMusicModel?> {
+        return playingMusicRepositoryService.lastPlayingMusic.map {
+            it?.toPlayingMusicModel()
         }
     }
 }

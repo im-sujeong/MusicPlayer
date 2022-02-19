@@ -2,11 +2,42 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_graph"
-    app:startDestination="@id/home_fragment">
+    android:id="@+id/main_nav"
+    app:startDestination="@id/homeFragment">
     <fragment
-        android:id="@+id/home_fragment"
+        android:id="@+id/homeFragment"
         android:name="com.sue.musicplayer.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_fragment_to_topSongsFragment"
+            app:destination="@id/topSongsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_releaseMusicFragment"
+            app:destination="@id/releaseMusicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playingListFragment"
+        android:name="com.sue.musicplayer.ui.playinglist.PlayingListFragment"
+        android:label="fragment_playing_list"
+        tools:layout="@layout/fragment_playing_list" >
+
+        <argument
+            android:name="currentPlayingMusic"
+            app:argType="com.sue.musicplayer.domain.model.PlayingMusicModel"
+            app:nullable="true"/>
+    </fragment>
+
+    <action
+        android:id="@+id/action_go_to_playingListFragment"
+        app:destination="@id/playingListFragment" />
+    <fragment
+        android:id="@+id/topSongsFragment"
+        android:name="com.sue.musicplayer.ui.topsongs.TopSongsFragment"
+        android:label="TopSongsFragment" />
+    <fragment
+        android:id="@+id/releaseMusicFragment"
+        android:name="com.sue.musicplayer.ui.release.ReleaseMusicFragment"
+        android:label="fragment_release_music"
+        tools:layout="@layout/fragment_release_music" />
 </navigation>

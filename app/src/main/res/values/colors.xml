@@ -4,6 +4,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="darkNavyBlue">#00011f</color>
+    <color name="darkBlueGrey">#0d0e2a</color>
+    <color name="dark">#33344c</color>
     <color name="mariGold">#ffc700</color>
     <color name="pinkishGrey">#bdbdbd</color>
     <color name="brownGrey">#828282</color>

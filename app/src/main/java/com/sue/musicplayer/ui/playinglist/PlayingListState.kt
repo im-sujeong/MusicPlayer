@@ -1,10 +1,9 @@
-package com.sue.musicplayer.ui.main
+package com.sue.musicplayer.ui.playinglist
 
 import com.sue.musicplayer.domain.model.PlayingMusicModel
 
-sealed class MainState {
+sealed class PlayingListState() {
     data class Success(
-        val lastPlayingMusic: PlayingMusicModel?,
         val playingMusicList: List<PlayingMusicModel>
-    ): MainState()
+    ): PlayingListState()
 }

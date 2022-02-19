@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sue.musicplayer.R
-import com.sue.musicplayer.databinding.ItemTopSongBinding
+import com.sue.musicplayer.databinding.ItemTopSongsBinding
 import com.sue.musicplayer.domain.model.MusicModel
 import com.sue.musicplayer.extensions.loadImage
 import kotlin.math.abs
@@ -32,7 +32,7 @@ class TopSongsAdapter(
     }
 
     inner class ViewHolder(
-        private val binding: ItemTopSongBinding
+        private val binding: ItemTopSongsBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MusicModel) = with(binding) {
             coverImageView.loadImage(item.coverImageUrl, 8f)
@@ -59,7 +59,7 @@ class TopSongsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemTopSongBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(ItemTopSongsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

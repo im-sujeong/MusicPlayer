@@ -8,8 +8,14 @@ internal class GetTopSongsUseCase(
     private val musicRepositoryService: MusicRepositoryService
 ) {
     suspend operator fun invoke(): List<MusicModel> {
-        return musicRepositoryService.getTopSongsAll().map {
+        val topSongsList = musicRepositoryService.getTopSongsAll().map {
             it.toMusicModel()
-        }.subList(0, 5)
+        }
+
+        return if(topSongsList.isEmpty()) {
+            topSongsList
+        }else {
+            topSongsList.subList(0, 5)
+        }
     }
 }

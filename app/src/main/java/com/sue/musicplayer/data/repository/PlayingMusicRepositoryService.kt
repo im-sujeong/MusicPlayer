@@ -4,7 +4,11 @@ import com.sue.musicplayer.data.entity.PlayingMusicEntity
 import kotlinx.coroutines.flow.Flow
 
 interface PlayingMusicRepositoryService {
-    suspend fun addPlayingList(playingMusicEntity: PlayingMusicEntity)
+    suspend fun updatePlayingList(playingMusicEntity: PlayingMusicEntity)
 
-    val playingMusicList: Flow<List<PlayingMusicEntity>>
+    suspend fun updateFavoriteMusic(playingMusicEntity: PlayingMusicEntity)
+
+    suspend fun getPlayingMusicList(): List<PlayingMusicEntity>
+
+    val lastPlayingMusic: Flow<PlayingMusicEntity?>
 }

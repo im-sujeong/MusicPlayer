@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sue.musicplayer.data.mapper.toPlayingMusicModel
 import com.sue.musicplayer.domain.model.MusicModel
-import com.sue.musicplayer.domain.usecase.GetRecommendMusicUseCase
-import com.sue.musicplayer.domain.usecase.home.AddPlayingListUseCase
+import com.sue.musicplayer.domain.usecase.UpdatePlayingListUseCase
+import com.sue.musicplayer.domain.usecase.home.GetRecommendMusicUseCase
 import com.sue.musicplayer.domain.usecase.home.GetReleaseMusicUseCase
 import com.sue.musicplayer.domain.usecase.home.GetTopSongsUseCase
 import com.sue.musicplayer.ui.base.BaseViewModel
@@ -16,7 +16,7 @@ internal class HomeViewModel(
     private val getRecommendMusicUseCase: GetRecommendMusicUseCase,
     private val getReleaseMusicUseCase: GetReleaseMusicUseCase,
     private val getTopSongsUseCase: GetTopSongsUseCase,
-    private val addPlayingListUseCase: AddPlayingListUseCase
+    private val updatePlayingListUseCase: UpdatePlayingListUseCase
 ): BaseViewModel() {
     val stateLiveData = MutableLiveData<HomeState>()
 
@@ -31,11 +31,10 @@ internal class HomeViewModel(
     }
 
     fun addPlayingList(musicModel: MusicModel) = viewModelScope.launch{
-        addPlayingListUseCase(
+        updatePlayingListUseCase(
             musicModel.toPlayingMusicModel(
                 addedDateTime = System.currentTimeMillis(),
-                lastPlayingDateTime = System.currentTimeMillis(),
-                false
+                lastPlayingDateTime = System.currentTimeMillis()
             )
         )
     }

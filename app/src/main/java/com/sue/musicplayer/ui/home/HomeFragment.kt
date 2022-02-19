@@ -1,19 +1,19 @@
 package com.sue.musicplayer.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.sue.musicplayer.databinding.FragmentHomeBinding
 import com.sue.musicplayer.domain.model.MusicModel
-import com.sue.musicplayer.domain.model.PlayingMusicModel
 import com.sue.musicplayer.extensions.dpToPx
 import com.sue.musicplayer.ui.base.BaseFragment
 import com.sue.musicplayer.ui.adapter.RecommendMusicAdapter
 import com.sue.musicplayer.ui.adapter.ReleaseMusicAdapter
 import com.sue.musicplayer.ui.adapter.TopSongsAdapter
-import com.sue.musicplayer.ui.main.MainActivity
 import org.koin.android.ext.android.inject
 
 internal class HomeFragment: BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -34,10 +34,10 @@ internal class HomeFragment: BaseFragment<HomeViewModel, FragmentHomeBinding>() 
     private fun initViews() = with(binding){
         recommendMusicAdapter = RecommendMusicAdapter()
         releaseMusicAdapter = ReleaseMusicAdapter {
-            addAndPlayingMusic(it)
+            addPlayingList(it)
         }
         topSongsAdapter = TopSongsAdapter {
-            addAndPlayingMusic(it)
+            addPlayingList(it)
         }
 
         CompositePageTransformer().apply {
@@ -51,6 +51,18 @@ internal class HomeFragment: BaseFragment<HomeViewModel, FragmentHomeBinding>() 
         releaseRecyclerView.adapter = releaseMusicAdapter
 
         topSongRecyclerView.adapter = topSongsAdapter
+
+        moreReleaseButton.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToReleaseMusicFragment()
+            )
+        }
+
+        moreTopSongButton.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToTopSongsFragment()
+            )
+        }
     }
 
     override fun observeData() = viewModel.stateLiveData.observe(viewLifecycleOwner){ state ->
@@ -66,7 +78,7 @@ internal class HomeFragment: BaseFragment<HomeViewModel, FragmentHomeBinding>() 
         topSongsAdapter.submitList(state.musicList)
     }
 
-    private fun addAndPlayingMusic(musicModel: MusicModel) {
+    private fun addPlayingList(musicModel: MusicModel) {
         viewModel.addPlayingList(musicModel)
     }
 }

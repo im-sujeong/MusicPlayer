@@ -1,5 +1,6 @@
 package com.sue.musicplayer.data.mapper
 
+import com.google.android.exoplayer2.MediaItem
 import com.sue.musicplayer.data.entity.PlayingMusicEntity
 import com.sue.musicplayer.data.response.RecommendMusicResponse
 import com.sue.musicplayer.data.response.MusicResponse
@@ -26,9 +27,9 @@ fun MusicResponse.toMusicModel() =
         rank = rank
     )
 
-fun PlayingMusicEntity.toPlayingMusicModel(isPlaying: Boolean = false) =
+fun PlayingMusicEntity.toPlayingMusicModel(isSelected: Boolean = false, isPlaying: Boolean = false) =
     PlayingMusicModel(
-        id, title, artistName, coverImageUrl, streamUrl, isFavorite, addedDateTime, lastPlayingDateTime, isPlaying
+        id, title, artistName, coverImageUrl, streamUrl, isFavorite, addedDateTime, lastPlayingDateTime, isSelected, isPlaying
     )
 
 fun PlayingMusicModel.toPlayingMusicEntity() =
@@ -36,12 +37,19 @@ fun PlayingMusicModel.toPlayingMusicEntity() =
         id, title, artistName, coverImageUrl, streamUrl, isFavorite, addedDateTime, lastPlayingDateTime
     )
 
-fun MusicModel.toPlayingMusicModel(addedDateTime: Long, lastPlayingDateTime: Long, isPlaying: Boolean) =
+fun PlayingMusicModel.toMediaItem() =
+    MediaItem
+        .Builder()
+        .setMediaId(id.toString())
+        .setUri(streamUrl)
+        .build()
+
+fun MusicModel.toPlayingMusicModel(addedDateTime: Long, lastPlayingDateTime: Long) =
     PlayingMusicModel(
-        id, title, artistName, coverImageUrl, streamUrl, false, addedDateTime, lastPlayingDateTime, isPlaying
+        id, title, artistName, coverImageUrl, streamUrl, false, addedDateTime, lastPlayingDateTime, false, false
     )
 
 fun List<PlayingMusicEntity>.toPlayingMusicModelList() =
     map {
-        it.toPlayingMusicModel(false)
+        it.toPlayingMusicModel()
     }

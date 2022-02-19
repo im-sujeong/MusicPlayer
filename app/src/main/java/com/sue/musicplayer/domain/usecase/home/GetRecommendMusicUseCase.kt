@@ -1,4 +1,4 @@
-package com.sue.musicplayer.domain.usecase
+package com.sue.musicplayer.domain.usecase.home
 
 import com.sue.musicplayer.data.mapper.toRecommendMusicModel
 import com.sue.musicplayer.data.repository.MusicRepositoryService

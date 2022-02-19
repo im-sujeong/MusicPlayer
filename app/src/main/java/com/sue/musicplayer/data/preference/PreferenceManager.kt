@@ -9,7 +9,7 @@ class PreferenceManager(
     companion object {
         const val PREFERENCE_NAME = "MusicPlayerSP"
 
-        const val KEY_LAST_PLAYING_MUSIC_ID = "KEY_LAST_PLAYING_MUSIC_ID"
+        const val KEY_SHUFFLE_MODE = "KEY_SHUFFLE_MODE"
     }
 
     private fun getPreferences(context: Context): SharedPreferences =
@@ -26,5 +26,22 @@ class PreferenceManager(
 
     private fun getLong(key: String): Long{
         return prefs.getLong(key, -1)
+    }
+
+    private fun putBoolean(key: String, value: Boolean) {
+        editor.putBoolean(key, value)
+        editor.apply()
+    }
+
+    private fun getBoolean(key: String, default: Boolean): Boolean {
+        return prefs.getBoolean(key, default)
+    }
+
+    fun putShuffleMode(isShuffle: Boolean) {
+        putBoolean(KEY_SHUFFLE_MODE, isShuffle)
+    }
+
+    fun isShuffleMode(): Boolean {
+        return getBoolean(KEY_SHUFFLE_MODE, false)
     }
 }

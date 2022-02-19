@@ -2,12 +2,13 @@ package com.sue.musicplayer.ui.main
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.sue.musicplayer.MainNavDirections
 import com.sue.musicplayer.R
 import com.sue.musicplayer.databinding.ActivityMainBinding
 import com.sue.musicplayer.domain.model.PlayingMusicModel
@@ -24,6 +25,8 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>() {
         (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
     }
 
+    private var backPressedTime: Long = 0
+
     override fun onSupportNavigateUp(): Boolean {
         return navigationController.navigateUp() || super.onSupportNavigateUp()
     }
@@ -33,92 +36,78 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragmentContainer, PlayerFragment())
+            .replace(R.id.fragmentContainer, PlayerFragment(), PlayerFragment.TAG)
             .commit()
     }
 
     override fun initViews() = with(binding) {
+        setSupportActionBar(toolBar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        setupActionBarWithNavController(navigationController)
+
         navigationController.addOnDestinationChangedListener { _, destination, arguments ->
             when(destination.id) {
+                R.id.homeFragment -> {
+                    toolBar.isGone = true
 
-            }
-        }
-    }
-
-    override fun observeData() = viewModel.stateLiveData.observe(this){ state ->
-        when(state) {
-            is MainState.Success -> {
-                //handleSuccess(state)
-            }
-        }
-    }
-
-    /*private fun handleSuccess(state: MainState.Success) = with(binding){
-        if( state.playingMusicList.isNotEmpty() ) {
-            titleTextView.text = state.lastPlayingMusic?.title
-            artistNameTextView.text = state.lastPlayingMusic?.artistName
-            artistNameTextView.isVisible = true
-
-            seekBar.isEnabled = true
-            controlButton.isEnabled = true
-            previousButton.isEnabled = true
-            nextButton.isEnabled = true
-            goToListButton.isEnabled = true
-
-            setMusicList(state.playingMusicList)
-        }else {
-            titleTextView.setText(R.string.no_playing_music)
-            artistNameTextView.isGone = true
-
-            seekBar.isEnabled = false
-            controlButton.isEnabled = false
-            previousButton.isEnabled = false
-            nextButton.isEnabled = false
-            goToListButton.isEnabled = false
-        }
-    }
-
-    private fun initPlayerView() = with(binding){
-        playerView.player = player
-
-        player.addListener(object : Player.Listener{
-            override fun onIsPlayingChanged(isPlaying: Boolean) {
-                super.onIsPlayingChanged(isPlaying)
-
-                controlButton.setImageResource(
-                    if(isPlaying) {
-                        R.drawable.ic_play24
-                    } else {
-                        R.drawable.ic_pause24
+                    supportFragmentManager.findFragmentByTag(PlayerFragment.TAG)?.let {
+                        (it as PlayerFragment).showGoToListButton()
                     }
-                )
-            }
+                }
 
-            override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
-                super.onMediaItemTransition(mediaItem, reason)
-            }
+                R.id.playingListFragment -> {
+                    setActionBar(R.string.playing_list)
+                }
 
-            override fun onPlaybackStateChanged(playbackState: Int) {
-                super.onPlaybackStateChanged(playbackState)
+                R.id.topSongsFragment -> {
+                    setActionBar(R.string.top_songs)
+                }
+
+                R.id.releaseMusicFragment -> {
+                    setActionBar(R.string.new_release)
+                }
             }
-        })
+        }
     }
 
-    private fun setMusicList(playingMusicList: List<PlayingMusicModel>) {
-        player.addMediaItems(playingMusicList.map { music ->
-            MediaItem
-                .Builder()
-                .setMediaId(music.id.toString())
-                .setUri(music.streamUrl)
-                .build()
-        })
+    private fun setActionBar(@StringRes title: Int) = with(binding){
+        toolBar.isVisible = true
 
-        player.prepare()
-
-        Log.i("sujeong", "media count : ${player.mediaItemCount}")
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
+        titleTextView.setText(title)
     }
 
-    fun playingMusic() {
+    override fun observeData() { }
 
-    }*/
+    fun goToPlayingList(currentPlayingMusic: PlayingMusicModel?) {
+        navigationController.currentDestination?.let { destination ->
+            if(destination.id != R.id.playingListFragment) {
+                navigationController.navigate(MainNavDirections.actionGoToPlayingListFragment(currentPlayingMusic))
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        if( isPossibleFinishApp() ) {
+            finishApp()
+        }else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun isPossibleFinishApp() : Boolean {
+        return navigationController.currentDestination?.id == R.id.homeFragment &&
+                (supportFragmentManager.findFragmentByTag(PlayerFragment.TAG) as PlayerFragment).isClosedPlayer()
+    }
+
+    private fun finishApp() {
+        if( (System.currentTimeMillis() - backPressedTime) < 1000 ) {
+            finish()
+        }else {
+            Toast.makeText(this, R.string.press_back_key_one_more, Toast.LENGTH_SHORT).show()
+
+            backPressedTime = System.currentTimeMillis()
+        }
+    }
 }
