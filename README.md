@@ -6,6 +6,7 @@
 * _클린아키텍쳐_ 를 적용하였고, _MVVM_ 패턴을 이용하여 개발했습니다.
 * 개발을 위해 __(이)가 사용 되었습니다.
   - _Jetpack Navigation_
+  - _Motion Layout_
   - _Exo Player_
   - _Coroutine_
   - _Koin_
