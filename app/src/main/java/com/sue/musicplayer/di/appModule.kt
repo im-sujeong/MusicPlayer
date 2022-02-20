@@ -2,9 +2,9 @@ package com.sue.musicplayer.di
 
 import com.sue.musicplayer.data.preference.PreferenceManager
 import com.sue.musicplayer.data.repository.MusicRepositoryImpl
-import com.sue.musicplayer.data.repository.MusicRepositoryService
+import com.sue.musicplayer.domain.repository.MusicRepositoryService
 import com.sue.musicplayer.data.repository.PlayingMusicRepositoryImpl
-import com.sue.musicplayer.data.repository.PlayingMusicRepositoryService
+import com.sue.musicplayer.domain.repository.PlayingMusicRepositoryService
 import com.sue.musicplayer.domain.model.PlayingMusicModel
 import com.sue.musicplayer.domain.usecase.player.UpdateFavoriteMusicUseCase
 import com.sue.musicplayer.domain.usecase.UpdatePlayingListUseCase

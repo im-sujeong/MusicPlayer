@@ -1,4 +1,4 @@
-package com.sue.musicplayer.data.repository
+package com.sue.musicplayer.domain.repository
 
 import com.sue.musicplayer.data.entity.PlayingMusicEntity
 import kotlinx.coroutines.flow.Flow

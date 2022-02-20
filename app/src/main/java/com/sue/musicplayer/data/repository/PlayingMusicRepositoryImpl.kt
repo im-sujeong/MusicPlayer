@@ -2,9 +2,9 @@ package com.sue.musicplayer.data.repository
 
 import com.sue.musicplayer.data.db.dao.PlayingMusicDao
 import com.sue.musicplayer.data.entity.PlayingMusicEntity
+import com.sue.musicplayer.domain.repository.PlayingMusicRepositoryService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 

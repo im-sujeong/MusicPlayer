@@ -1,7 +1,7 @@
 package com.sue.musicplayer.domain.usecase.release
 
 import com.sue.musicplayer.data.mapper.toMusicModel
-import com.sue.musicplayer.data.repository.MusicRepositoryService
+import com.sue.musicplayer.domain.repository.MusicRepositoryService
 import com.sue.musicplayer.domain.model.MusicModel
 
 class GetAllReleaseMusicUseCase(

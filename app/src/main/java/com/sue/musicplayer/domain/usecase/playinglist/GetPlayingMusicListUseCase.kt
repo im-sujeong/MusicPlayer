@@ -1,7 +1,7 @@
 package com.sue.musicplayer.domain.usecase.playinglist
 
 import com.sue.musicplayer.data.mapper.toPlayingMusicModel
-import com.sue.musicplayer.data.repository.PlayingMusicRepositoryService
+import com.sue.musicplayer.domain.repository.PlayingMusicRepositoryService
 import com.sue.musicplayer.domain.model.PlayingMusicModel
 
 class GetPlayingMusicListUseCase(

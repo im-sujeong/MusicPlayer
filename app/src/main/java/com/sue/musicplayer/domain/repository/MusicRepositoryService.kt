@@ -1,4 +1,4 @@
-package com.sue.musicplayer.data.repository
+package com.sue.musicplayer.domain.repository
 
 import com.sue.musicplayer.data.response.RecommendMusicResponse
 import com.sue.musicplayer.data.response.MusicResponse
